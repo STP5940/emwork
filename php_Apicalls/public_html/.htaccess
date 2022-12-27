@@ -1,0 +1,29 @@
+# For production, put your rewrite rules directly into your VirtualHost
+# directive and turn off AllowOverride.
+
+
+RewriteEngine On
+#RewriteCond %{HTTPS} !on
+#RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L, R=301]
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} -s [OR]
+    RewriteCond %{REQUEST_FILENAME} -l [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^.*$ - [NC,L]
+
+
+    RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
+    RewriteRule ^(.*) - [E=BASE:%1]
+    RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]
+</IfModule>
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW SSL_REDIRECT:devlottovip.com
+#RewriteEngine on
+#RewriteCond %{HTTPS} off
+#RewriteCond %{HTTP_HOST} ^devlottovip.com$
+#RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE SSL_REDIRECT:devlottovip.com
+

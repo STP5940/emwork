@@ -1,0 +1,8 @@
+/public_html/error_log
+/web/resources/cache/bladeone/*
+/web/resources/cache/twig/*
+/web/vendor/*
+/web/log/*
+/web/*.lock
+/web/*.env
+/web/log/*
